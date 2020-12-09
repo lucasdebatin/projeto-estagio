@@ -1,0 +1,249 @@
+<html xmlns="http://www.w3.org/1999/html" >
+<head>
+    <title>Desafio IClass</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+    <!-- Font-awesome CSS -->
+    <link href="../../../static/fontawesome/css/all.min.css" rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}"/>
+
+    <!-- RPG-awesome CSS https://nagoshiashumari.github.io/Rpg-Awesome/ -->
+    <link href="../../../static/rpgawesome/css/rpg-awesome.min.css" rel="stylesheet" th:href="@{/rpgawesome/css/rpg-awesome.min.css}"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+<br/>
+<div class="container" style="text-align: center;width: 100%"><h3></h3></div>
+<hr /><br>
+
+<form action="#" th:action="@{/adicionaPersonagem}" th:object="${personagem}" method="post">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Cadastro de Personagens</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('classe')}"
+                                      th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-6">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('nome')}"
+                                          th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('nivel')}"
+                                          th:utext="${err}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="classe">Classe</label>
+                                    </div>
+                                    <select class="custom-select" id="classe" th:field="*{classe}">
+                                        <option value=""></option>
+                                        <option th:each="classePers : ${classes}" th:value="${classePers.name()}" th:text="${classePers.name()}"></option>
+                                    </select>
+                                </div>
+                                <div class="input-group col-lg-6">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="nome">Nome</label>
+                                    </div>
+                                    <input type="text" class="form-control"
+                                           name="nome" th:field="*{nome}"
+                                           placeholder="Nome do Personagem"
+                                           aria-label="Nome do Personagem"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="nivel">Nivel</label>
+                                    </div>
+                                    <input type="number" class="form-control" disabled="disabled"
+                                           name="nivel" th:field="*{nivel}"
+                                           placeholder="Nível do Personagem"
+                                           aria-label="Nível do Personagem"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control"
+                                   name="nivel" th:field="*{id}"
+                                   placeholder="Id do Personagem"
+                                   aria-label="Id do Personagem"
+                                   aria-describedby="basic-addon1">
+                            <br/>
+                            <div class="row">
+                                <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('raca')}"
+                                          th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('sexo')}"
+                                          th:utext="${err}"></span>
+                                </div>
+
+                                <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('experiencia')}"
+                                          th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('pontos')}"
+                                          th:utext="${err}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="raca">Raça</label>
+                                    </div>
+                                    <select class="custom-select" id="raca" th:field="*{raca}">
+                                        <option value=""></option>
+                                        <option th:each="racaPers : ${racas}" th:value="${racaPers.name()}" th:text="${racaPers.name()}"></option>
+                                    </select>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="sexo">Sexo</label>
+                                    </div>
+                                    <select class="custom-select" id="sexo" th:field="*{sexo}">
+                                        <option value=""></option>
+                                        <option th:each="sexoPers : ${sexos}" th:value="${sexoPers.name()}" th:text="${sexoPers.name()}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="experiencia">Experiência</label>
+                                    </div>
+                                    <input type="number" class="form-control" disabled="disabled"
+                                           name="experiencia" th:field="*{experiencia}"
+                                           placeholder="Experiência do Personagem"
+                                           aria-label="Experiência do Personagem"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="pontos">Pontos</label>
+                                    </div>
+                                    <input type="number" class="form-control" disabled="disabled"
+                                           name="pontos" th:field="*{pontos}"
+                                           placeholder="Pontos do Personagem"
+                                           aria-label="Pontos do Personagem"
+                                           aria-describedby="basic-addon1">
+                                </div>
+
+                            </div>
+                            <br/>
+
+
+                            <br />
+
+                            <div class="row">
+                                <h5>Atributos</h5>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-group col-lg-3">
+                                     <span class="text-danger" th:each="err : ${#fields.errors('forca')}"
+                                           th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                     <span class="text-danger" th:each="err : ${#fields.errors('destreza')}"
+                                           th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('inteligencia')}"
+                                          th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                     <span class="text-danger" th:each="err : ${#fields.errors('resistencia')}"
+                                           th:utext="${err}"></span>
+                                </div>
+                                <div class="input-group col-lg-3">
+                                     <span class="text-danger" th:each="err : ${#fields.errors('sorte')}"
+                                           th:utext="${err}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text ra ra-muscle-fat" style="display:grid;" title="Força" for="força"></label>
+                                    </div>
+                                    <input type="number" class="form-control"
+                                           name="forca" th:field="*{forca}"
+                                           placeholder="Atributo de Força"
+                                           aria-label="Atributo de Força"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text ra ra-player-dodge"  style="display:grid;" title="Destreza"></div>
+                                    </div>
+                                    <input type="number" class="form-control "
+                                           name="destreza" th:field="*{destreza}"
+                                           placeholder="Atributo de Destreza"
+                                           aria-label="Atributo de Destreza"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text fas fa-journal-whills"  style="display:grid;" title="Inteligência"></div>
+                                    </div>
+                                    <input type="number" class="form-control"
+                                           name="inteligencia" th:field="*{inteligencia}"
+                                           placeholder="Atributo de Inteligência"
+                                           aria-label="Atributo de Inteligência"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text fas fa-shield-alt"  style="display:grid;" title="Resistência"></div>
+                                    </div>
+                                    <input type="number" class="form-control"
+                                           name="resistencia" th:field="*{resistencia}"
+                                           placeholder="Atributo de Resistência"
+                                           aria-label="Atributo de Resistência"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-lg-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text ra ra-aura"  style="display:grid;" title="Sorte"></div>
+                                    </div>
+                                    <input type="number" class="form-control "
+                                           name="destreza" th:field="*{sorte}"
+                                           placeholder="Atributo de Sorte"
+                                           aria-label="Atributo de Sorte"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+
+                            <br/>
+                            <input class="btn btn-lg btn-primary" type="submit" align="right"/>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js" th:href="@{/js/bootstrap.js}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+</body>
+</html>

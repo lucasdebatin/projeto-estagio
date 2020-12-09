@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Desafio IClass</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+    <!-- Font-awesome CSS -->
+    <link href="../static/fontawesome/css/all.min.css" rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}"/>
+
+    <!-- RPG-awesome CSS https://nagoshiashumari.github.io/Rpg-Awesome/ -->
+    <link href="../static/rpgawesome/css/rpg-awesome.min.css" rel="stylesheet" th:href="@{/rpgawesome/css/rpg-awesome.min.css}"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+<br/>
+<div class="container-fluid" style="text-align: center">
+    <h3> Desafio IClass </h3>
+    <br/>
+    <a class="navbar-brand" href="http://www.iclass.com.br" target="_blank" ><img th:src="@{images/iclass_logo.jpg}" width="300px" alt="Desafio IClass" title="Desafio IClass"/></a>
+</div>
+
+</body>
+</html>

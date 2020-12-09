@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/html" >
+<head>
+    <title>Desafio IClass</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+    <!-- Font-awesome CSS -->
+    <link href="../../../static/fontawesome/css/all.min.css" rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}"/>
+
+    <!-- RPG-awesome CSS https://nagoshiashumari.github.io/Rpg-Awesome/ -->
+    <link href="../../../static/rpgawesome/css/rpg-awesome.min.css" rel="stylesheet" th:href="@{/rpgawesome/css/rpg-awesome.min.css}"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+<br/>
+<div class="container" style="text-align: center;width: 100%"><h3>Cadastro de Personagens</h3></div>
+<hr /><br>
+<!--<h3>Lista de Personagens</h3>-->
+
+<div th:unless="${#lists.isEmpty(personagens)}" class="container-fluid">
+
+    <table id="tableClient" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th><a class="fas fa-plus btn btn-primary btn-sm" href="/adicionaPersonagem" title="Adicionar"></a></th>
+            <th class="col-sm-3" data-field="nome">Nome</th>
+            <th class="col-sm-2" data-field="raca">Raça</th>
+            <th class="col-sm-2" data-field="classe">Classe</th>
+            <th class="col-sm-2" data-field="sexo">Sexo</th>
+            <th class="col-sm-2" data-field="nivel">Nível</th>
+            <th class="col-sm-3" data-field="experiencia">Experiência</th>
+        </tr>
+        </thead>
+        <tr th:each="personagem : ${personagens}">
+            <td> <a class="fas fa-pencil-alt btn btn-primary btn-sm"
+                    th:href="@{/editaPersonagem/{id}(id=${personagem.id})}" title="Editar"></a></td>
+            <td th:text="${personagem.nome}" width="50%"></td>
+            <td th:text="${personagem.raca}" width="25%"></td>
+            <td th:text="${personagem.classe}" width="25%"></td>
+            <td th:text="${personagem.sexo}" width="25%"></td>
+            <td th:text="${personagem.nivel}" width="25%"></td>
+            <td th:text="${personagem.experiencia}" width="25%"></td>
+        </tr>
+    </table>
+
+</div>
+
+
+<div th:if="${#lists.isEmpty(personagens)}">
+    <p>Não existem personagens cadastrados</p>
+</div>
+
+<hr />
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js" th:href="@{/js/bootstrap.js}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+</body>
+</html>

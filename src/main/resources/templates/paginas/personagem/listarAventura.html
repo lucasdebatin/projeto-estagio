@@ -1,0 +1,123 @@
+<html xmlns="http://www.w3.org/1999/html" >
+<head>
+    <title>Desafio IClass</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+    <!-- Font-awesome CSS -->
+    <link href="../../../static/fontawesome/css/all.min.css" rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}"/>
+
+    <!-- RPG-awesome CSS https://nagoshiashumari.github.io/Rpg-Awesome/ -->
+    <link href="../../../static/rpgawesome/css/rpg-awesome.min.css" rel="stylesheet" th:href="@{/rpgawesome/css/rpg-awesome.min.css}"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+<br/>
+<div class="container" style="text-align: center;width: 100%"><h3>Cadastro de Aventuras</h3></div>
+<hr /><br>
+
+<!-- Cadastro de aventuras -->
+<div class="container">
+    <form action="#" th:action="@{/adicionaAventura}" th:object="${aventura}" method="post">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Nova Aventura:</h4>
+                </div>
+            </div>
+            <div class="input-group col-lg-3">
+                                    <span class="text-danger" th:each="err : ${#fields.errors('personagem')}"
+                                          th:utext="${err}"></span>
+            </div>
+            <div class="row">
+                <div class="input-group col-lg-6">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="personagem">Personagem</label>
+                    </div>
+                    <select class="custom-select" id="personagem" th:field="*{personagem}">
+                        <option value=""></option>
+                        <option th:each="personagem : ${personagems}" th:value="${personagem.id}" th:text="${personagem.nome}"></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <br/>
+            </div>
+            <div class="row">
+                <div class="input-group col-lg-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="xp">XP</label>
+                    </div>
+                    <input type="text" class="form-control"
+                       name="xp" th:field="*{xp}"
+                       placeholder="XP"
+                       aria-label="xp"
+                       aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="row">
+                <br/>
+            </div>
+            <div class = row>
+                <div class="input-group col-lg-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="data">Data</label>
+                    </div>
+                    <input type="data" class="form-control"
+                       name="xp" th:field="*{data}"
+                       placeholder="data"
+                       aria-label="data"
+                       aria-describedby="basic-addon1">
+                </div>
+            </div>
+            <div class="row">
+                <br/>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <input class="btn btn-lg btn-primary" type="submit" align="right"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--Listar-->
+<div th:unless="${#lists.isEmpty(personagems)}" class="container-fluid">
+    <table id="tableXP" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th class="col-sm-3" data-field="personagem">Personagem</th>
+            <th class="col-sm-3" data-field="experiencia">Experiência</th>
+            <th class="col-sm-3" data-field="nivel">Nível</th>
+            <th class="col-sm-3" data-field="pontos">Pontos</th>
+        </tr>
+        </thead>
+        <tr th:each="char : ${personagems}">
+            <td th:text="${char.nome}" width="50%"></td>
+            <td th:text="${char.experiencia}" width="5%"></td>
+            <td th:text="${char.nivel}" width="5%"></td>
+            <td th:text="${char.pontos}" width="5%"></td>
+        </tr>
+    </table>
+
+</div>
+
+<hr />
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js" th:href="@{/js/bootstrap.js}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+</body>
+</html>

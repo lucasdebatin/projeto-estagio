@@ -1,0 +1,150 @@
+<html>
+<head>
+    <title>Desafio IClass</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+    <!-- Font-awesome CSS -->
+    <link href="/static/fontawesome/css/all.min.css" rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}"/>
+
+    <!-- RPG-awesome CSS https://nagoshiashumari.github.io/Rpg-Awesome/ -->
+    <link href="/static/rpgawesome/css/rpg-awesome.min.css" rel="stylesheet" th:href="@{/rpgawesome/css/rpg-awesome.min.css}"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<br/>
+<div class="container" style="text-align: center;width: 100%"><h3>Cadastro de Itens</h3></div>
+
+<hr /><br>
+
+<div class="container">
+    <h4>Novo Item:</h4>
+    <form action="#" th:action="@{/adicionaItem}" th:object="${item}" method="post">
+
+        <div class="container">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="detalhe">Detalhe</label>
+                </div>
+                <input type="text" class="form-control"
+                       name="detalhe" th:field="*{detalhe}"
+                       placeholder="Detalhe do Item"
+                       aria-label="Detalhe do Item"
+                       aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="peso">Peso</label>
+                </div>
+                <input type="text" class="form-control"
+                       name="peso" th:field="*{peso}"
+                       placeholder="Peso"
+                       aria-label="Peso"
+                       aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="container">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="tipo">Tipo do Item</label>
+                </div>
+                <select class="custom-select" id="tipo" th:field="*{tipo}">
+                    <option value=""></option>
+                    <option th:each="tipoItem : ${tipos}" th:value="${tipoItem.name()}" th:text="${tipoItem.name()}"></option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="materialPrimario">Material Primário</label>
+                </div>
+                <select class="custom-select" id="materialPrimario" th:field="*{materialPrimario}">
+                    <option value=""></option>
+                    <option th:each="mPrimario : ${materials}" th:value="${mPrimario.name()}" th:text="${mPrimario.name()}"></option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="materialSecundario">Material Secundário</label>
+                </div>
+                <select class="custom-select" id="materialSecundario" th:field="*{materialSecundario}">
+                    <option value=""></option>
+                    <option th:each="mSecundario : ${materials}" th:value="${mSecundario.name()}" th:text="${mSecundario.name()}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="bonusDestreza">Bônus Destreza</label>
+                </div>
+                <input type="text" class="form-control"
+                       name="bonusDestreza" th:field="*{bonusDestreza}"
+                       placeholder="Bônus Destreza"
+                       aria-label="Bônus Destreza"
+                       aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="bonusResistencia">Bônus Resistência</label>
+                </div>
+                <input type="text" class="form-control"
+                       name="bonusResistencia" th:field="*{bonusResistencia}"
+                       placeholder="Bônus Resistência"
+                       aria-label="Bônus Resistência"
+                       aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <br/>
+        <input class="btn btn-lg btn-primary" type="submit" align="right"/>
+    </form>
+
+</div>
+<hr />
+<!--<h3>Lista de Personagens</h3>-->
+
+<!--<h3>Lista de Itens</h3>-->
+<div th:unless="${#lists.isEmpty(itens)}" class="container-fluid">
+    <table id="tableItem" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th class="col-sm-3" data-field="detalhe">Detalhe</th>
+            <th class="col-sm-3" data-field="peso">Peso</th>
+            <th class="col-sm-3" data-field="tipo">Tipo</th>
+            <th class="col-sm-3" data-field="materialPrimario">Material Primário</th>
+            <th class="col-sm-3" data-field="materialSecundario">Material Secundário</th>
+            <th class="col-sm-3" data-field="bonusDestreza">Bônus Destreza</th>
+            <th class="col-sm-3" data-field="bonusResistencia">Bônus Resistência</th>
+        </tr>
+        </thead>
+        <tr th:each="item : ${itens}">
+            <td th:text="${item.detalhe}" width="50%"></td>
+            <td th:text="${item.peso}" width="25%"></td>
+            <td th:text="${item.tipo}" width="25%"></td>
+            <td th:text="${item.materialPrimario}" width="25%"></td>
+            <td th:text="${item.materialSecundario}" width="50%"></td>
+            <td th:text="${item.bonusDestreza}" width="25%"></td>
+            <td th:text="${item.bonusResistencia}" width="25%"></td>
+        </tr>
+    </table>
+
+</div>
+
+
+<div th:if="${#lists.isEmpty(itens)}">
+    <p>Não existem itens cadastrados</p>
+</div>
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js" th:href="@{/js/bootstrap.js}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+</body>
+</html>
